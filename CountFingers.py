@@ -16,22 +16,40 @@ while True:
     cv2.putText(vid, 'Fingers Open: ', (30,180), cv2.FONT_HERSHEY_PLAIN
                 , 1.3, (255,0,0), 2)
     if len(lms)>0:
-        if lms[0][1]<lms[2][1]:
-            if lms[4][1]<lms[3][1] and lms[4][1]<lms[2][1]:
-                count.append(0)
-            else:
-                count.append(1)
-        elif lms[0][1]>lms[2][1]:
-            if lms[4][1]>lms[3][1] and lms[4][1]>lms[2][1]:
-                count.append(0)
-            else:
-                count.append(1)
+        if lms[0][2]>lms[8][2]:
+            if lms[0][1]<lms[2][1]:
+                if lms[4][1]<lms[3][1] and lms[4][1]<lms[2][1]:
+                    count.append(0)
+                else:
+                    count.append(1)
+            elif lms[0][1]>lms[2][1]:
+                if lms[4][1]>lms[3][1] and lms[4][1]>lms[2][1]:
+                    count.append(0)
+                else:
+                    count.append(1)
 
-        for ids in range(1,5):
-           if lms[tips[ids]][2]>lms[tips[ids]-2][2]:
-               count.append(0)
-           else:
-               count.append(1)
+            for ids in range(1,5):
+               if lms[tips[ids]][2]>lms[tips[ids]-2][2]:
+                   count.append(0)
+               else:
+                   count.append(1)
+        elif lms[0][2]<lms[8][2]:
+            if lms[0][1] > lms[2][1]:
+                if lms[4][1] > lms[3][1] and lms[4][1] > lms[2][1]:
+                    count.append(0)
+                else:
+                    count.append(1)
+            elif lms[0][1] < lms[2][1]:
+                if lms[4][1] < lms[3][1] and lms[4][1] < lms[2][1]:
+                    count.append(0)
+                else:
+                    count.append(1)
+
+            for ids in range(1, 5):
+                if lms[tips[ids]][2] < lms[tips[ids] - 2][2]:
+                    count.append(0)
+                else:
+                    count.append(1)
 
         cv2.putText(vid, str(sum(count)), (55,350), cv2.FONT_HERSHEY_PLAIN, 10, (255,0,0), 8)
 
